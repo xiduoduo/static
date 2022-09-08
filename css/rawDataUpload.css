@@ -1,0 +1,67 @@
+#Usage {
+    min-height: 40px;
+}
+
+.layui-layer-title {
+    background-color: #009688 !important;
+}
+
+.layui-carousel {
+    left: 15%;
+
+}
+
+#imgCarousel {
+    background-color: #fff !important;
+}
+
+.carousel-item {
+    display: table-cell;
+    vertical-align: middle;
+    background-color: #fff !important;
+    text-align: center;
+}
+
+.updateButtonItem {
+
+}
+
+.updateButtonDiv {
+    position: fixed;
+    bottom: 0px;
+    z-index: 10;
+    background-color: #eee;
+    padding-left: 45%;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.addButtonItem {
+
+}
+
+.addButtonDiv {
+    position: fixed;
+    bottom: 0px;
+    z-index: 10;
+    background-color: #eee;
+    padding-left: 45%;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#imgCarousel {
+    padding-bottom: 68px;
+}
+
+body {
+    border: none;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5em;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 11px;
+}
+

@@ -1,0 +1,51 @@
+<!doctype html>
+<html class="x-admin-sm">
+<head>
+    <meta charset="UTF-8">
+    <title>验潮仪数据管理</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="stylesheet" href="./css/font.css">
+    <link rel="stylesheet" href="./css/xadmin.css">
+    <style>
+        .chart {
+            width: 100%;
+            height: 400px;
+            /*display: none;*/
+        }
+    </style>
+    <script src="./lib/layui/layui.js"></script>
+    <script src="./js/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./js/xadmin.js"></script>
+    <script src="./js/cookie.js"></script>
+    <script src="./js/login/pubParam.js"></script>
+    <script>
+        // 是否开启刷新记忆tab功能
+        // var is_remember = false;
+        checkLogin();
+    </script>
+    <script src="./js/util/stringUtil.js"></script>
+    <script src="./js/util/uploadUtil.js"></script>
+    <script src="./js/cdn.bootcss.com/echarts/3.3.2/echarts.min.js"></script>
+    <script src="./js/ATGDataManager.js"></script>
+</head>
+
+<body>
+<div class="x-body">
+    <xblock>
+        <input type="file" style="display:none" id="input_atg_file">
+        <button class="layui-btn" id="btn_load_atg_file">
+            <i class="layui-icon"></i>加载
+        </button>
+    </xblock>
+    <!--表格-->
+    <table class="layui-table" id="tb_dataList" lay-filter="dataList"></table>
+    <!--显示图形-->
+    <div class="chart" id="div_chart"></div>
+</div>
+
+</body>
+</html>

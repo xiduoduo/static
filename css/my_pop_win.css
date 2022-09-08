@@ -1,0 +1,10 @@
+.windowButtonDiv{
+    /*position: fixed;*/
+    bottom: 0px;
+    z-index: 10;
+    /*background-color: #eee;*/
+    padding-left: 45%;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}

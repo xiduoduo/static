@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+
+<head>
+    <meta charset="UTF-8">
+    <title>试验过程数据上传</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" href="./css/font.css">
+    <link rel="stylesheet" href="./css/xadmin.css">
+    <link rel="stylesheet" href="./css/my_pop_win.css">
+    <script type="text/javascript" src="./js/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./js/xadmin.js"></script>
+    <script type="text/javascript" src="./js/cookie.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="./js/cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="./js/cdn.staticfile.org/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="./js/login/pubParam.js"></script>
+    <script>
+        // 是否开启刷新记忆tab功能
+        // var is_remember = false;
+        checkLogin();
+    </script>
+    <script src="./js/util/uploadUtil.js"></script>
+    <script src="./js/rawDataUpload.js"></script>
+</head>
+<body>
+<div class="x-body">
+    <form class="layui-form">
+        <!--数据分类-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">数据分类</label>
+            <div class="layui-input-block">
+                <select multiple="" selected id="category_select">
+                    <option value="SP">太阳光度计</option>
+                    <option value="AWS">自动气象站</option>
+                </select>
+            </div>
+        </div>
+
+        <!--起始日期-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">起始时间</label>
+            <div class="layui-input-block">
+                <input class="layui-input" placeholder="起始日" name="start" id="start_date">
+            </div>
+        </div>
+        <!--结束时间-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">结束日期</label>
+            <div class="layui-input-block">
+                <input class="layui-input" placeholder="截止日" name="end" id="end_date">
+            </div>
+        </div>
+        <!--备注-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+                <textarea class="layui-textarea" id="ta_comment"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">观测数据</label>
+            <input type="file" name="files" multiple="multiple" style="margin-top: 10px;" id="file_upload_input"/>
+        </div>
+        <!--buttons-->
+        <div class="layui-form-item">
+            <div class="layui-form-item">
+                <div class="windowButtonDiv">
+                    <button class="layui-btn" lay-submit lay-filter="addRawData">确定</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

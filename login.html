@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>系统登录</title>
+    <link href="./css/default.css" rel="stylesheet" type="text/css"/>
+    <link href="lib/layui/css/layui.css" rel="stylesheet" type="text/css"/>
+    <!--必要样式-->
+    <link href="./css/styles.css" rel="stylesheet" type="text/css"/>
+    <link href="./css/demo.css" rel="stylesheet" type="text/css"/>
+    <link href="./css/loaders.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="./css/login.css">
+    <!--必要js-->
+    <script src="./js/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./lib/layui/layui.js"></script>
+    <script src="js/login/pubParam.js"></script>
+    <script src="./js/util/common.js"></script>
+    <script src="./js/util/Particleground.js"></script>
+</head>
+<body>
+<div class='login'>
+    <div class='login_title'>
+        <span>试验辅助决策系统登录</span>
+    </div>
+    <div class='login_fields'>
+        <div class='login_fields__user'>
+            <div class='icon'>
+                <img alt="" src='./resource/img/user_icon_copy.png'>
+            </div>
+            <input name="login" placeholder='用户名' maxlength="16" type='text'
+                   autocomplete="off" value="admin"/>
+            <div class='validation'>
+                <img alt="" src='./resource/img/tick.png'>
+            </div>
+        </div>
+        <div class='login_fields__password'>
+            <div class='icon'>
+                <img alt="" src='./resource/img/lock_icon_copy.png'>
+            </div>
+            <input name="pwd" type="password" placeholder='密码' maxlength="16"
+                   type='text' autocomplete="off">
+            <div class='validation'>
+                <img alt="" src='resource/img/tick.png'>
+            </div>
+        </div>
+        <div class='login_fields__password'>
+            <div class='icon'>
+                <img alt="" src='resource/img/key.png'>
+            </div>
+            <input name="code" placeholder='验证码' maxlength="4" type='text'
+                   name="ValidateNum" autocomplete="off"
+                   style="width: 100px;">
+            <canvas id="canvas" width="100" height="35" width="120"></canvas>
+        </div>
+        <div class='login_fields__password'>
+            <div class='validation' style="opacity: 1; right: -5px;top: -3px;">
+                <canvas class="J_codeimg" id="myCanvas" onclick="Code();">
+                    对不起，您的浏览器不支持canvas，请下载最新版浏览器!
+                </canvas>
+            </div>
+        </div>
+        <div class='login_fields__submit'>
+            <input type='button' value='登录'>
+        </div>
+    </div>
+    <div class='success'>
+    </div>
+    <div class='disclaimer'>
+        <!--        <p>欢迎登陆野外试验辅助决策系统</p>-->
+    </div>
+</div>
+<div class='authent'>
+    <div class="loader" style="height: 44px;width: 44px;margin-left: 28px;">
+        <div class="loader-inner ball-clip-rotate-multiple">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <p>认证中...</p>
+</div>
+<div class="OverWindows"></div>
+<script src="./js/jquery/jquery-ui.min.js"></script>
+<script src='./js/unclassified/stopExecutionOnTimeout.js?t=1'></script>
+<script src="./js/util/Particleground.js"></script>
+<script src="./js/jquery/jquery.mockjax.js"></script>
+<script src="./js/login/pubParam.js"></script>
+<script src="./js/util/stringUtil.js"></script>
+<script src="./lib/layui/layui.js"></script>
+
+<script>
+    var canGetCookie = 0; //是否支持存储Cookie 0 不支持 1 支持
+    var ajaxmockjax = 1; //是否启用虚拟Ajax的请求响 0 不启用  1 启用
+    //默认账号密码
+    var truelogin = "";
+    var truepwd = "";
+
+    var CodeVal = 0;
+    Code();
+
+    function Code() {
+        if (canGetCookie == 1) {
+            createCode("AdminCode");
+            var AdminCode = getCookieValue("AdminCode");
+            showCheck(AdminCode);
+        } else {
+            //showCheck(createCode(""));
+        }
+    }
+
+    function showCheck(a) {
+        CodeVal = a;
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        ctx.clearRect(0, 0, 1000, 1000);
+        ctx.font = "80px 'Hiragino Sans GB'";
+        ctx.fillStyle = "#E8DFE8";
+        ctx.fillText(a, 0, 100);
+    }
+
+    //粒子背景特效
+    if (true) {
+        $('body').particleground({
+            dotColor: '#E8DFE8',
+            lineColor: '#133b88'
+        });
+        $('input[name="pwd"]').focus(function () {
+            $(this).attr('type', 'password');
+        });
+        $('input[type="text"]').focus(function () {
+            $(this).prev().animate({
+                'opacity': '1'
+            }, 200);
+        });
+        $('input[type="text"],input[type="password"]').blur(function () {
+            $(this).prev().animate({
+                'opacity': '.5'
+            }, 200);
+        });
+        $('input[name="login"],input[name="pwd"]').keyup(function () {
+            var Len = $(this).val().length;
+            if (!$(this).val() == '' && Len >= 5) {
+                $(this).next().animate({
+                    'opacity': '1',
+                    'right': '30'
+                }, 200);
+            } else {
+                $(this).next().animate({
+                    'opacity': '0',
+                    'right': '20'
+                }, 200);
+            }
+        });
+    }
+
+    //全屏
+    var fullscreen = function () {
+        elem = document.body;
+        if (elem.webkitRequestFullScreen) {
+            elem.webkitRequestFullScreen();
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.requestFullScreen) {
+            elem.requestFullscreen();
+        } else {
+            //浏览器不支持全屏API或已被禁用
+        }
+    }
+</script>
+
+<script src="./js/login/ThreeWebGL.js"></script>
+<script src="./js/login/ThreeExtras.js"></script>
+<script src="./js/login/Detector.js"></script>
+<script src="./js/login/RequestAnimationFrame.js"></script>
+<script src="./js/login/verifyCode.js"></script>
+<script src="./js/login/login.js"></script>
+
+</body>
+</html>
