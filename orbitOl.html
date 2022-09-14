@@ -52,19 +52,19 @@
         checkLogin();
     </script>
     <script src="./opelayer/v6.14.1-dist/ol.js"></script>
-    <script src="./js/util/OlUtils.js" charset="UTF-8"></script>
+    <!-- <script src="./js/util/OlUtils.js" charset="UTF-8"></script> -->
     <script src="./js/util/TianDiTuUtils.js" charset="UTF-8"></script>
     <script src="./js/orbitOl.js"></script>
 </head>
 <body>
 <div class="x-body">
     <div class="layui-row x-so">
-        <form class="layui-form">
+        <!-- <form class="layui-form"> -->
             <!--卫星标识-->
             <label>卫星</label>
             <div class="layui-input-inline">
                 <!--卫星标识-->
-                <select id="select_satid" lay-filter="select_satid">
+                <select  style="height: 38px;background:#fff;" id="select_satid" lay-filter="select_satid">
                     <option value="" style="display: none"></option>
                     <option value="H1C">海洋1C</option>
                     <option value="H1D">海洋1D</option>
@@ -86,10 +86,13 @@
             <input class="layui-input" id="input_interval"
                    onkeyup="onlyNumber(this)" onblur="onlyNumber(this)" style="width:50px;">
             <!--            <input type="number" style="height: 38px;">-->
-            <button class="layui-btn" lay-submit="" lay-filter="calc">
+            <!-- <button class="layui-btn" lay-submit="" lay-filter="calc">
+                <i class="layui-icon">&#xe615;</i>
+            </button> -->
+            <button class="layui-btn"  onclick="submit()">
                 <i class="layui-icon">&#xe615;</i>
             </button>
-        </form>
+        <!-- </form> -->
     </div>
     <xblock style="display: none;">
         <button class="layui-btn" id="btn_draw_polygon">
@@ -107,4 +110,5 @@
     </div>
 </div>
 </body>
+
 </html>
