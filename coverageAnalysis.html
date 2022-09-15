@@ -29,12 +29,12 @@
 <body>
 <div class="x-body">
     <div class="layui-row x-so">
-        <form class="layui-form">
+        <!-- <form class="layui-form"> -->
             <!--卫星标识-->
             <label>卫星</label>
             <div class="layui-input-inline">
                 <!--卫星标识-->
-                <select id="select_satid" lay-filter="select_satid">
+                <select id="select_satid" lay-filter="select_satid" style="height: 38px;background: #fff">
                     <option value="" style="display: none"></option>
                     <option value="H1C">海洋1C</option>
                     <option value="H1D">海洋1D</option>
@@ -48,7 +48,7 @@
             <label>载荷</label>
             <div class="layui-input-inline">
                 <!--载荷标识-->
-                <select id="select_sensorid" lay-filter="select_sensorid">
+                <select id="select_sensorid" lay-filter="select_sensorid" style="height: 38px;background: #fff">
                     <option value="" style="display: none"></option>
                     <option value="COCTS">水温水色扫描仪</option>
                     <option value="CZI">海岸带成像仪</option>
@@ -72,7 +72,8 @@
                 <i class="layui-icon"></i>加载试验区域
             </button>
             <button class="layui-btn" lay-submit="" lay-filter="calc"> 计算</button>
-        </form>
+            
+        <!-- </form> -->
     </div>
     <!---地图数据展示--->
     <div id="map"></div>
