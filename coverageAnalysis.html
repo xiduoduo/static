@@ -13,6 +13,119 @@
             /* height: 700px; */
             height: calc(100vh - 70px);
         }
+        #div_add {
+                background: #66b7f9;
+                color: #ffffff;
+                border: none;
+                display: block;
+                height: 30px;
+                margin: 20px 0;
+            }
+            
+            #div_body p {
+                height: 40px;
+                border: 1px solid #c0c0c0;
+                line-height: 40px;
+                text-align: center;
+            }
+            
+            #div_body img {
+                width: 18px;
+                height: 18px;
+                margin-top: 9px;
+                float: right;
+            }
+            
+            #div_body p:hover {
+                background: #66b7f9;
+                color: #ffffff;
+            }
+            
+            .leftpage {
+                height: 500px;
+                background: #ffffff;
+            }
+            
+            #adduse {
+                display: none;
+                width: 550px;
+                /* height: 300px; */
+                /* border: 1px solid #c0c0c0; */
+                background: #ffffff;
+                position: absolute;
+                /* left: 50%;
+                top: 20%; */
+                z-index: 999;
+                padding: 20px;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%,-50%);
+            }
+            
+            #adduse p {
+                /* padding-left: 15px; */
+                text-align: center;
+            }
+            
+            .addusep {
+                /* background: #f2f2f2; */
+                height: 30px;
+                line-height: 30px;
+                padding-left: 5px;
+            }
+            
+            #adduse p:nth-child(2) {
+                padding-top: 25px;
+            }
+            
+            #adduse p:nth-child(6) {
+                padding-bottom: 25px;
+            }
+            
+            #cancle {
+                margin-left: 66px;
+                background: #428bca;
+                color: #ffffff;
+                border: none;
+                width: 60px;
+                height: 30px;
+            }
+            
+            #save {
+                margin-left: 36px;
+                background: #428bca;
+                color: #ffffff;
+                border: none;
+                width: 60px;
+                height: 30px;
+            }
+            a {
+            text-decoration: none;
+        }
+        a:hover {
+            color: #a5f5cd;
+        }
+        
+        table {
+            width: 550px;
+            /* margin: 100px auto; */
+            border-collapse: collapse;
+            text-align: center;
+        }
+        
+        td,
+        th {
+            border: 1px solid #333;
+        }
+        
+        thead tr,tbody tr {
+            height: 40px;
+            /* background-color: #ccc; */
+        }
+        .layui-icon {
+            position: absolute;
+            right: 20px;
+        }
     </style>
     <script src="./js/jquery/3.2.1/jquery.min.js"></script>
     <script src="./lib/layui/layui.js"></script>
@@ -74,6 +187,28 @@
             </button>
             <button class="layui-btn" lay-submit="" lay-filter="calc"> 计算</button>
             <button class="layui-btn clear-btn"> 清空</button>
+            <form id="adduse">
+                <div style="display: flex">
+                    <p class="addusep">过境时间表</p>
+                    <i id="qingchu" class="layui-icon layui-unselect layui-tab-close">ဆ</i>
+                </div>
+                <table cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 表格数据动态生成 -->
+                        <!-- <tr>
+                            <td></td>
+                        </tr> -->
+                    </tbody>
+                </table>
+
+            </form>
             
         <!-- </form> -->
     </div>

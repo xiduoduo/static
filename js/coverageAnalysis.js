@@ -22,6 +22,57 @@ function initFormAndDate() {
                     'Authorization': `bearer ${jwtCode}`
                 },
                 success: function (resp) {
+                    $('#adduse').show();
+                    let chArr = document.querySelector("tbody").getElementsByClassName("trNo");
+                    for(i=0;i<chArr.length;i++){
+                        if (chArr[i] != null) 
+                            chArr[i].parentNode.removeChild(chArr[i]); 
+                    }
+                    let chArr2 = document.querySelector("tbody").getElementsByClassName("trNo");
+                    for(i=0;i<chArr2.length;i++){
+                        if (chArr[i] != null) 
+                            chArr[i].parentNode.removeChild(chArr[i]); 
+                    }
+                    let chArr3 = document.querySelector("tbody").getElementsByClassName("trNo");
+                    for(i=0;i<chArr3.length;i++){
+                        if (chArr[i] != null) 
+                            chArr[i].parentNode.removeChild(chArr[i]); 
+                    }
+            
+                    //获取根节点
+                    var tbody = document.querySelector("tbody");
+                    var datas = resp.data.time_table;
+                    datas.forEach((item,index)=>{
+                        item.num = index + 1;
+                    })
+                    // step2. 所有数据都是放在 tbody 中的 tr 里面
+                    for(var i = 0; i < datas.length; i++){
+                        var newNode_tr = document.createElement("tr");
+                        newNode_tr.className="trNo"
+                        //填充表格数据
+                        for (var key in datas[i]){
+                            if(key=='num'){
+                                var newNode_td = document.createElement("td");
+                                newNode_td.innerText = datas[i][key];
+                                newNode_tr.appendChild(newNode_td);
+                            }
+                        }
+                        for (var key in datas[i]){
+                            if(key=='start_time'){
+                                var newNode_td = document.createElement("td");
+                                newNode_td.innerText = datas[i][key];
+                                newNode_tr.appendChild(newNode_td);
+                            }
+                        }
+                        for (var key in datas[i]){
+                            if(key=='end_time'){
+                                var newNode_td = document.createElement("td");
+                                newNode_td.innerText = datas[i][key];
+                                newNode_tr.appendChild(newNode_td);
+                            }
+                        }
+                        tbody.appendChild(newNode_tr);
+                        }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     layer.alert(jqXHR.responseText, {icon: 2});
@@ -103,7 +154,9 @@ $(function () {
     map.addLayer(tdtRoadLayer());
     map.addLayer(tdtSatImageLayer());
     map.addLayer(tdtMarkLayer());
-
+    $("#qingchu").click(function() {
+        $('#adduse').hide();
+    })
     $.ajax({
         url: `${webRootUrl}/tle/loadExpArea`,
         type: 'GET',
