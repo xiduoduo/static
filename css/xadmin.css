@@ -15,14 +15,13 @@ html {
     width: 100%;
     height: 100%;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 
 body {
     width: 100%;
     min-height: 100%;
 }
-
 .login-bg {
     /*background: #eeeeee url() 0 0 no-repeat;*/
     background: url(../images/bg.png) no-repeat center;
@@ -137,7 +136,12 @@ body {
 }
 
 .x-body {
-    padding: 20px;
+    /* padding: 20px; */
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom:10px;
+    overflow-y: hidden;
 }
 
 .x-nav {
@@ -167,7 +171,7 @@ xblock {
 .x-so {
     /*text-align: center;*/
     /*background: #f2f2f2 url() 0 0 no-repeat;*/
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .x-so input.layui-input {
