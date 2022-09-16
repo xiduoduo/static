@@ -31,17 +31,19 @@ function initFormAndDate() {
                         if (chArr5[i] != null) 
                             chArr5[i].parentNode.removeChild(chArr5[i]); 
                     }
-    //循环遍历将经纬度转到"EPSG:4326"投影坐标系下
-                    for(var m = 0;m<coordinates.length;m++){
-                        var coordinatesPolygon = new Array();
-                        for (var i = 0; i < coordinates[m].length; i++) {
-                            var pointTransform = ol.proj.fromLonLat([coordinates[m][i][0], coordinates[m][i][1]], "EPSG:4326");
-                            coordinatesPolygon.push(pointTransform);
-                        }
-                        var source = new ol.source.Vector();
-                
-                        //矢量图层
-                        var vector = new ol.layer.Vector({
+                    var map = initMap("map");
+                        map.addLayer(tdtRoadLayer());
+                        map.addLayer(tdtSatImageLayer());
+                        map.addLayer(tdtMarkLayer());
+                        //循环遍历将经纬度转到"EPSG:4326"投影坐标系下
+                        const polygonFeature = new ol.Feature(
+                            new ol.geom.Polygon(coordinates).transform('EPSG:4326', 'EPSG:3857'));
+                    
+                        let source = new ol.source.Vector({
+                            features: [polygonFeature]
+                        });
+                    
+                        var layer = new ol.layer.Vector({
                             source: source,
                             style: new ol.style.Style({
                                 fill: new ol.style.Fill({
@@ -59,40 +61,8 @@ function initFormAndDate() {
                                 })
                             })
                         });
-                        totArr.push(vector)
-                        //多边形此处注意一定要是[坐标数组]
-                        var plygon = new ol.geom.Polygon([coordinatesPolygon])
-                        //多边形要素类
-                        var feature = new ol.Feature({
-                            geometry: plygon,
-                        });
-                        source.addFeature(feature);
-                    }
-                    // var view=new ol.View({
-                    //         center:[116.46,39.92],
-                    //         zoom: 4,
-                    //         projection: "EPSG:4326"
-                    //     });
-                    //     let layers = [tdtRoadLayer(),tdtSatImageLayer(),tdtMarkLayer()];
-                    //     totArr.forEach((item,index)=>{
-                    //         layers.push(item)
-                    //     })
-                    //     var map = new ol.Map({
-                    //         layers: layers,
-                            
-                    //         view:view,
-                    //         target: "map"
-                    //     });
-                        // 点
-                                        // let chArr5 = document.body.getElementsByClassName("ol-viewport");
-                    // for(i=0;i<chArr5.length;i++){
-                    //     if (chArr5[i] != null) 
-                    //         chArr5[i].parentNode.removeChild(chArr5[i]); 
-                    // }
-    //                     var map = initMap("map");
-    // map.addLayer(tdtRoadLayer());
-    // map.addLayer(tdtSatImageLayer());
-    // map.addLayer(tdtMarkLayer());
+                    
+                        map.addLayer(layer);
 
                         resp.data.orbit.forEach((item, index) =>{
                             var points = []
@@ -114,24 +84,8 @@ function initFormAndDate() {
                             feature.setStyle(style);
                             points.push(feature)
                             pointLayer.getSource().addFeature(feature);
-                            console.log(pointLayer) 
-                            // map.addLayer(pointLayer)
+                            map.addLayer(pointLayer)
 
-                            var view=new ol.View({
-                                center:[116.46,39.92],
-                                zoom: 4,
-                                projection: "EPSG:4326"
-                            });
-                            let layers = [tdtRoadLayer(),tdtSatImageLayer(),tdtMarkLayer(),pointLayer];
-                            totArr.forEach((item,index)=>{
-                                layers.push(item)
-                            })
-                            var map = new ol.Map({
-                                layers: layers,
-                                
-                                view:view,
-                                target: "map"
-                            });
                         })
 
 
@@ -187,32 +141,6 @@ function initFormAndDate() {
                         }
                         tbody.appendChild(newNode_tr);
                         }
-
-
-                    //画点
-                    // resp.orbit.forEach((item, index) =>{
-                    //     var points = []
-                    //     var pointLayer = new ol.layer.Vector({
-                    //         source: new ol.source.Vector({
-                    //             features: []
-                    //         })
-                    //     })
-                    //     var feature = new ol.Feature({
-                    //         geometry: new ol.geom.Point(ol.proj.fromLonLat([item.lon, item.lat]))
-                    //     })
-                    //     let style = new ol.style.Style({
-                    //         image: new ol.style.Icon({
-                    //             scale: 0.8,
-                    //             src: './images/green.png',
-                    //             anchor: [0.48, 0.52]
-                    //         }),
-                    //     })
-                    //     feature.setStyle(style);
-                    //     points.push(feature)
-                    //     pointLayer.getSource().addFeature(feature);
-                    //     map.addLayer(pointLayer)
-                    // })
-
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     layer.alert(jqXHR.responseText, {icon: 2});
@@ -338,7 +266,6 @@ $(function () {
                 'Authorization': `bearer ${jwtCode}`
             },
             success: function (resp) {
-                console.log(resp)
             },
             error: function (resp) {
                 
